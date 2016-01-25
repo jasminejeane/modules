@@ -1,31 +1,53 @@
 
 
+// document.querySelectorAll("input"); 
 
 
 
 
 var player = 1;
-
-
-
+var playerX = 0;
+var playerO = 0;
 
 
 function clickBtn(btn){
 	if(player == 1){
 		document.getElementById(btn).value = "X";
+		document.getElementById(btn).style.backgroundImage = "url(images/cube1.jpg)";
+
 		document.getElementById(btn).disabled = "disabled";
 
+
 		player -= 1;
+		whoseTurn();
 		winner();
 	} 
 	else{
 		document.getElementById(btn).value = "O";
+		document.getElementById(btn).style.backgroundImage = "url(images/cube3.jpg)";
+
 		document.getElementById(btn).disabled = "disabled";
 
 		player += 1; 
+		whoseTurn();
 		winner();
 	}
 }
+
+function whoseTurn(){
+	if (player == 1){
+
+		document.getElementById('yourTurn').value = "Your Turn:";
+		document.getElementById('turn').value = "Anna";
+	}
+	else{
+		document.getElementById('yourTurn').value = "Your Turn:";
+		document.getElementById('turn').value = "Elsa";
+
+	}
+}
+
+
 
 function winner(){
 	if(		document.getElementById('btn1').value == "X" &&
@@ -51,9 +73,15 @@ function winner(){
 			document.getElementById('btn9').value == "X" ||
 			document.getElementById('btn3').value == "X" &&
 			document.getElementById('btn5').value == "X" &&
-			document.getElementById('btn7').value == "X" ){
-	alert("Player X is the winner");
+			document.getElementById('btn7').value == "X" )
+{
+	alert("Anna won this round");
+
+	playerX += 1;
+			document.getElementById('score1').value = playerX;
+
 	reset();
+	gameOver();
 }
 else if(	document.getElementById('btn1').value == "O" &&
 			document.getElementById('btn2').value == "O" &&
@@ -78,13 +106,19 @@ else if(	document.getElementById('btn1').value == "O" &&
 			document.getElementById('btn9').value == "O" ||
 			document.getElementById('btn3').value == "O" &&
 			document.getElementById('btn5').value == "O" &&
-			document.getElementById('btn7').value == "O" ){
-	alert("Player O is the winner");
+			document.getElementById('btn7').value == "O" )
+{
+	alert("Elsa won this round");
+	playerO +=1;
+			document.getElementById('score2').value = playerO;
+
 	reset();
+	gameOver();
 }
 }
 
 function  reset(){
+	
 			document.getElementById('btn1').value = ""; 
 			document.getElementById('btn2').value = "";
 			document.getElementById('btn3').value = "";
@@ -94,6 +128,15 @@ function  reset(){
 			document.getElementById('btn7').value = ""; 
 			document.getElementById('btn8').value = "";
 			document.getElementById('btn9').value = "";
+			document.getElementById('btn1').style.backgroundImage = ""; 
+			document.getElementById('btn2').style.backgroundImage = "";
+			document.getElementById('btn3').style.backgroundImage = "";
+			document.getElementById('btn4').style.backgroundImage = ""; 
+			document.getElementById('btn5').style.backgroundImage = "";
+			document.getElementById('btn6').style.backgroundImage = "";
+			document.getElementById('btn7').style.backgroundImage = ""; 
+			document.getElementById('btn8').style.backgroundImage = "";
+			document.getElementById('btn9').style.backgroundImage = "";
 			document.getElementById('btn1').disabled = ""; 
 			document.getElementById('btn2').disabled = "";
 			document.getElementById('btn3').disabled = "";
@@ -103,10 +146,31 @@ function  reset(){
 			document.getElementById('btn7').disabled = ""; 
 			document.getElementById('btn8').disabled = "";
 			document.getElementById('btn9').disabled = "";
+			document.getElementById('turn').value = "";
+			document.getElementById('yourTurn').value = "";			
+		
 }
 
+function gameOver(){
 
+if(playerX == 3){
+			alert("Anna is the Winner");
+			playerX = 0;
+			playerO = 0;
+			document.getElementById('score1').value = "";
+			document.getElementById('score2').value = "";
 
+}
+else if (playerO == 3){
+			alert("Elsa is the Winner");
+			playerX = 0;
+			playerO = 0;
+			document.getElementById('score1').value = "";
+
+			document.getElementById('score2').value = "";
+
+}
+}
 
 
 
